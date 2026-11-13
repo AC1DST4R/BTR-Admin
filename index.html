@@ -8,6 +8,19 @@
 <title>Broom The Room | Admin Panel</title>
 
 <style>
+:root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --panel2: #21262d;
+    --border: #30363d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --green: #238636;
+    --red: #da3633;
+    --blue: #1f6feb;
+    --gold: #9e6a03;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -15,393 +28,463 @@
 }
 
 body {
-    background: #0d1117;
-    color: #e6edf3;
-    font-family: Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     min-height: 100vh;
-    padding: 25px;
 }
 
-.container {
-    max-width: 1100px;
-    margin: auto;
-}
-
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-bottom: 25px;
-}
-
-h1 {
-    font-size: 25px;
-}
-
-h1 span {
-    color: #58a6ff;
-}
-
-.subtitle {
-    color: #8b949e;
-    margin-top: 7px;
-    font-size: 13px;
-}
-
-.panel {
-    background: #161b22;
-    border: 1px solid #30363d;
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 20px;
-}
-
-.panel h2 {
-    font-size: 18px;
-    margin-bottom: 15px;
-}
-
-.status {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    color: #3fb950;
-    font-size: 12px;
-    background: #0d2818;
-    border: 1px solid #238636;
-    border-radius: 20px;
-    padding: 7px 12px;
-}
-
-.status.error {
-    color: #f85149;
-    background: #2d1117;
-    border-color: #da3633;
-}
-
-.status.loading {
-    color: #d29922;
-    background: #2b2111;
-    border-color: #9e6a03;
-}
-
-.stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 12px;
-    margin-bottom: 20px;
-}
-
-.stat {
-    background: #161b22;
-    border: 1px solid #30363d;
-    padding: 17px;
-    border-radius: 10px;
-}
-
-.stat-label {
-    color: #8b949e;
-    font-size: 12px;
-}
-
-.stat-value {
-    font-size: 25px;
-    font-weight: bold;
-    margin-top: 8px;
-}
-
-input {
-    width: 100%;
-    background: #0d1117;
-    color: #e6edf3;
-    border: 1px solid #30363d;
-    border-radius: 7px;
-    padding: 11px;
-    margin: 7px 0 13px;
-    outline: none;
-}
-
-input:focus {
-    border-color: #58a6ff;
-}
-
-label {
-    font-size: 13px;
-    color: #c9d1d9;
+button, input, select {
+    font: inherit;
 }
 
 button {
-    background: #21262d;
-    color: #e6edf3;
-    border: 1px solid #30363d;
-    padding: 9px 13px;
-    border-radius: 7px;
     cursor: pointer;
-    font-weight: 600;
-    transition: 0.15s;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 9px 13px;
+    color: white;
+    background: var(--panel2);
+    transition: .15s;
 }
 
 button:hover {
-    background: #30363d;
+    filter: brightness(1.2);
 }
 
 button:disabled {
-    opacity: 0.5;
+    opacity: .5;
     cursor: not-allowed;
 }
 
 .primary {
-    background: #238636;
-    border-color: #2ea043;
-}
-
-.primary:hover {
-    background: #2ea043;
-}
-
-.blue {
-    background: #1f6feb;
-    border-color: #388bfd;
-}
-
-.blue:hover {
-    background: #388bfd;
+    background: var(--green);
+    border-color: var(--green);
 }
 
 .danger {
-    background: #da3633;
-    border-color: #f85149;
+    background: #8b2424;
+    border-color: #a52a2a;
 }
 
-.danger:hover {
-    background: #f85149;
+.blue {
+    background: var(--blue);
+    border-color: var(--blue);
 }
 
 .gold {
-    background: #9e6a03;
-    border-color: #d29922;
+    background: #6e5015;
+    border-color: var(--gold);
 }
 
-.gold:hover {
-    background: #bb8009;
-}
-
-.actions {
+header {
+    border-bottom: 1px solid var(--border);
+    padding: 18px 24px;
     display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-    margin-top: 12px;
-}
-
-.entry {
-    background: #0d1117;
-    border: 1px solid #30363d;
-    border-radius: 9px;
-    padding: 15px;
-    margin-bottom: 10px;
-}
-
-.entry-top {
-    display: flex;
+    align-items: center;
     justify-content: space-between;
+    gap: 15px;
     flex-wrap: wrap;
+    background: #010409;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--panel2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    font-size: 22px;
+}
+
+.brand h1 {
+    font-size: 17px;
+}
+
+.brand p {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 3px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
     gap: 10px;
 }
 
-.entry-name {
-    font-weight: bold;
+#account {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+main {
+    max-width: 1250px;
+    margin: auto;
+    padding: 25px 20px 60px;
+}
+
+h2 {
+    font-size: 21px;
+    margin-bottom: 7px;
+}
+
+.subtitle {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 22px;
+}
+
+#dashboard {
+    display: none;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 13px;
+    margin-bottom: 25px;
+}
+
+.stat {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    padding: 17px;
+}
+
+.stat-label {
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 9px;
+}
+
+.stat-value {
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.section {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.section-header {
+    padding: 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.section-header h3 {
     font-size: 15px;
 }
 
-.entry-info {
-    color: #8b949e;
-    font-size: 12px;
-    margin-top: 7px;
-    line-height: 1.7;
-    overflow-wrap: anywhere;
-}
-
-.tag {
-    display: inline-block;
-    padding: 4px 8px;
-    border-radius: 20px;
-    font-size: 11px;
-    background: #30363d;
-    color: #c9d1d9;
-}
-
-.tag.pending {
-    background: #3d2e0a;
-    color: #e3b341;
-}
-
-.tag.verified {
-    background: #0d2818;
-    color: #3fb950;
-}
-
-.tag.cheats {
-    background: #3d1014;
-    color: #ff7b72;
-}
-
-.empty {
-    color: #8b949e;
-    text-align: center;
-    padding: 25px;
-    border: 1px dashed #30363d;
-    border-radius: 8px;
-    font-size: 13px;
+.section-body {
+    padding: 16px;
 }
 
 .toolbar {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    gap: 9px;
     flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 14px;
 }
 
-.toolbar h2 {
-    margin: 0;
+input, select {
+    background: #0d1117;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    padding: 10px 12px;
+    outline: none;
+    min-width: 0;
 }
 
-.small {
-    color: #8b949e;
+input:focus, select:focus {
+    border-color: var(--blue);
+}
+
+.toolbar input {
+    flex: 1;
+    min-width: 180px;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+th {
+    color: var(--muted);
+    text-align: left;
+    font-weight: 500;
     font-size: 12px;
 }
 
-#toast {
+th, td {
+    padding: 13px 12px;
+    border-bottom: 1px solid var(--border);
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+.actions {
+    display: flex;
+    gap: 6px;
+}
+
+.actions button {
+    font-size: 11px;
+    padding: 7px 9px;
+}
+
+.status {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    background: #30363d;
+}
+
+.status.VERIFIED {
+    color: #3fb950;
+    background: #12291b;
+}
+
+.status.UNVERIFIED {
+    color: #d29922;
+    background: #302510;
+}
+
+.status.CHEATS_USED {
+    color: #ff7b72;
+    background: #3b1717;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 10px;
+}
+
+.form-grid input {
+    width: 100%;
+}
+
+.empty {
+    color: var(--muted);
+    text-align: center;
+    padding: 30px 10px;
+    font-size: 13px;
+}
+
+#message {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background: #161b22;
-    border: 1px solid #30363d;
-    border-radius: 8px;
-    padding: 13px 17px;
-    display: none;
     max-width: calc(100% - 40px);
+    padding: 13px 17px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: var(--panel2);
+    box-shadow: 0 8px 30px #0008;
+    font-size: 13px;
+    display: none;
     z-index: 10;
 }
 
-footer {
-    text-align: center;
-    color: #484f58;
-    font-size: 12px;
-    padding: 20px;
+#message.error {
+    border-color: var(--red);
 }
 
-@media(max-width: 600px) {
-    body {
-        padding: 14px;
+#message.success {
+    border-color: var(--green);
+}
+
+.footer {
+    color: var(--muted);
+    text-align: center;
+    font-size: 11px;
+    margin-top: 30px;
+}
+
+@media(max-width: 750px) {
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    h1 {
-        font-size: 21px;
+    .form-grid {
+        grid-template-columns: 1fr;
     }
 
-    .panel {
+    header {
         padding: 15px;
     }
 
-    .actions button {
-        flex: 1;
+    main {
+        padding: 18px 12px 40px;
     }
 }
 </style>
 </head>
 
 <body>
-<div class="container">
 
 <header>
-    <div>
-        <h1>BROOM THE ROOM <span>// ADMIN</span></h1>
-        <p class="subtitle">Leaderboard management and moderation</p>
+    <div class="brand">
+        <div class="brand-icon">🧹</div>
+        <div>
+            <h1>Broom The Room</h1>
+            <p>Administration Dashboard</p>
+        </div>
     </div>
-    <div id="authStatus" class="status loading">
-        Connecting...
+
+    <div class="header-right">
+        <span id="account">Connecting...</span>
+        <button id="logoutButton">Sign out</button>
     </div>
 </header>
 
-<div class="stats">
-    <div class="stat">
-        <div class="stat-label">Total Scores</div>
-        <div class="stat-value" id="totalCount">0</div>
-    </div>
-    <div class="stat">
-        <div class="stat-label">Pending Review</div>
-        <div class="stat-value" id="pendingCount">0</div>
-    </div>
-    <div class="stat">
-        <div class="stat-label">Verified</div>
-        <div class="stat-value" id="verifiedCount">0</div>
-    </div>
-    <div class="stat">
-        <div class="stat-label">Cheats Used</div>
-        <div class="stat-value" id="cheatsCount">0</div>
-    </div>
-</div>
+<main>
 
-<section class="panel">
-    <h2>Authentication</h2>
-    <p class="small">
-        Firebase anonymous authentication is used for this session.
-    </p>
-    <p class="entry-info" id="uidDisplay">Waiting for authentication...</p>
-</section>
+    <section id="dashboard">
 
-<section class="panel">
-    <h2>Submit Leaderboard Entry</h2>
+        <h2>Dashboard</h2>
+        <p class="subtitle">Manage scores, review entries, and moderate the global leaderboard.</p>
 
-    <form id="submitForm">
-        <label for="playerName">Player Name</label>
-        <input id="playerName" type="text" maxlength="40"
-            placeholder="Enter player name" required>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-label">Total Scores</div>
+                <div class="stat-value" id="totalCount">0</div>
+            </div>
 
-        <label for="playerTime">Completion Time (seconds)</label>
-        <input id="playerTime" type="number" min="0.001"
-            step="0.001" placeholder="Example: 12.450" required>
+            <div class="stat">
+                <div class="stat-label">Verified</div>
+                <div class="stat-value" id="verifiedCount">0</div>
+            </div>
 
-        <button class="primary" id="submitButton" type="submit">
-            Submit Score
-        </button>
-    </form>
-</section>
+            <div class="stat">
+                <div class="stat-label">Unverified</div>
+                <div class="stat-value" id="unverifiedCount">0</div>
+            </div>
 
-<section class="panel">
-    <div class="toolbar">
-        <h2>Moderation Queue</h2>
-        <button class="blue" id="refreshButton">↻ Refresh</button>
-    </div>
-    <p class="small" style="margin-bottom:15px">
-        Review leaderboard entries, approve scores, flag cheating, or delete entries.
-    </p>
-    <div id="queue">
-        <div class="empty">Loading leaderboard...</div>
-    </div>
-</section>
+            <div class="stat">
+                <div class="stat-label">Cheats Used</div>
+                <div class="stat-value" id="cheatCount">0</div>
+            </div>
+        </div>
 
-<section class="panel">
-    <div class="toolbar">
-        <h2>Submission History</h2>
-        <button id="historyRefresh">↻ Refresh</button>
-    </div>
-    <div id="history">
-        <div class="empty">Loading history...</div>
-    </div>
-</section>
+        <section class="section">
+            <div class="section-header">
+                <h3>Leaderboard Management</h3>
+                <button id="refreshButton">↻ Refresh</button>
+            </div>
 
-<footer>
-    Broom The Room Admin Panel
-</footer>
+            <div class="section-body">
+                <div class="toolbar">
+                    <input id="searchInput" placeholder="Search player names or document IDs...">
 
-</div>
+                    <select id="statusFilter">
+                        <option value="ALL">All statuses</option>
+                        <option value="VERIFIED">Verified</option>
+                        <option value="UNVERIFIED">Unverified</option>
+                        <option value="CHEATS_USED">Cheats Used</option>
+                    </select>
+                </div>
 
-<div id="toast"></div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Player</th>
+                                <th>Time</th>
+                                <th>Status</th>
+                                <th>Document ID</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="scoreRows">
+                            <tr><td colspan="5" class="empty">Loading scores...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <h3>Manually Add Score</h3>
+            </div>
+
+            <div class="section-body">
+                <p class="subtitle">
+                    Manually entered scores always start as UNVERIFIED and require approval.
+                </p>
+
+                <form id="manualForm" class="form-grid">
+                    <input id="manualName" placeholder="Player name" maxlength="40" required>
+                    <input id="manualTime" type="number" min="0.001" step="0.001" placeholder="Time in seconds" required>
+                    <button class="primary" id="submitButton" type="submit">Add Score</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-header">
+                <h3>CHEATS_USED Records</h3>
+                <span class="status CHEATS_USED">CHEATS_USED</span>
+            </div>
+
+            <div class="section-body">
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Player</th>
+                                <th>Time</th>
+                                <th>Document ID</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cheatRows">
+                            <tr><td colspan="4" class="empty">Loading records...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </section>
+
+    <p class="footer">Broom The Room Administration · Firebase</p>
+
+</main>
+
+<div id="message"></div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
@@ -409,6 +492,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/fireba
 import {
     getAuth,
     signInAnonymously,
+    signOut,
     onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 
@@ -416,8 +500,8 @@ import {
     getFirestore,
     collection,
     getDocs,
-    doc,
     addDoc,
+    doc,
     updateDoc,
     deleteDoc,
     writeBatch,
@@ -441,59 +525,65 @@ const leaderboardRef = collection(db, "leaderboard");
 const cheatsRef = collection(db, "cheatsLeaderboard");
 
 let currentUser = null;
-let leaderboardEntries = [];
-let cheatEntries = [];
+let scores = [];
+let cheatScores = [];
+let loading = false;
 
 const $ = id => document.getElementById(id);
 
-function toast(message, error = false) {
-    const element = $("toast");
-    element.textContent = message;
-    element.style.display = "block";
-    element.style.borderColor = error ? "#f85149" : "#238636";
+function notify(message, type = "success") {
+    const element = $("message");
 
-    clearTimeout(window.toastTimeout);
-    window.toastTimeout = setTimeout(() => {
+    element.textContent = message;
+    element.className = type;
+    element.style.display = "block";
+
+    clearTimeout(notify.timer);
+
+    notify.timer = setTimeout(() => {
         element.style.display = "none";
     }, 3500);
 }
 
-function formatTime(milliseconds) {
-    const value = Number(milliseconds);
-
-    if (!Number.isFinite(value)) return "Unknown";
-
-    return (value / 1000).toFixed(3) + "s";
-}
-
 function escapeHTML(value) {
-    return String(value ?? "").replace(/[&<>"']/g, character => ({
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
         "&": "&amp;",
         "<": "&lt;",
         ">": "&gt;",
         '"': "&quot;",
         "'": "&#039;"
-    })[character]);
+    })[char]);
 }
 
 function getPlayerName(data) {
     return data.name || data.playerName || data.username || "Unknown Player";
 }
 
+function getTime(data) {
+    const value = Number(
+        data.timeMs ??
+        data.time ??
+        data.completionTime ??
+        data.duration ??
+        0
+    );
+
+    if (!Number.isFinite(value) || value < 0) return "Unknown";
+
+    return `${(value / 1000).toFixed(3)}s`;
+}
+
 function getStatus(data) {
     return data.verificationStatus || "UNVERIFIED";
 }
 
-function getTag(status) {
-    if (status === "VERIFIED") {
-        return '<span class="tag verified">VERIFIED</span>';
-    }
+function formatStatus(status) {
+    return `<span class="status ${escapeHTML(status)}">${escapeHTML(status)}</span>`;
+}
 
-    if (status === "CHEATS_USED") {
-        return '<span class="tag cheats">CHEATS USED</span>';
-    }
-
-    return '<span class="tag pending">PENDING REVIEW</span>';
+function setLoading(value) {
+    loading = value;
+    $("refreshButton").disabled = value;
 }
 
 async function authenticate() {
@@ -503,33 +593,30 @@ async function authenticate() {
         }
     } catch (error) {
         console.error(error);
-        $("authStatus").textContent = "Authentication failed";
-        $("authStatus").className = "status error";
-        toast(error.message, true);
+        $("account").textContent = "Authentication failed";
+        notify(error.message, "error");
     }
 }
 
 onAuthStateChanged(auth, async user => {
+    currentUser = user;
+
     if (!user) {
-        currentUser = null;
-        $("authStatus").textContent = "Connecting...";
-        $("authStatus").className = "status loading";
+        $("dashboard").style.display = "none";
+        $("account").textContent = "Connecting...";
         return;
     }
 
-    currentUser = user;
+    $("account").textContent = "Anonymous session";
+    $("dashboard").style.display = "block";
 
-    $("authStatus").textContent = "Anonymous session active";
-    $("authStatus").className = "status";
-    $("uidDisplay").textContent = "Session UID: " + user.uid;
-
-    await refreshAll();
+    await loadScores();
 });
 
-async function refreshAll() {
-    if (!currentUser) return;
+async function loadScores() {
+    if (!currentUser || loading) return;
 
-    $("queue").innerHTML = '<div class="empty">Loading...</div>';
+    setLoading(true);
 
     try {
         const [leaderboardSnapshot, cheatsSnapshot] = await Promise.all([
@@ -537,136 +624,117 @@ async function refreshAll() {
             getDocs(cheatsRef)
         ]);
 
-        leaderboardEntries = leaderboardSnapshot.docs.map(item => ({
-            id: item.id,
-            ...item.data()
+        scores = leaderboardSnapshot.docs.map(snapshot => ({
+            id: snapshot.id,
+            data: snapshot.data()
         }));
 
-        cheatEntries = cheatsSnapshot.docs.map(item => ({
-            id: item.id,
-            ...item.data()
+        cheatScores = cheatsSnapshot.docs.map(snapshot => ({
+            id: snapshot.id,
+            data: snapshot.data()
         }));
 
-        renderStats();
-        renderQueue();
-        renderHistory();
+        updateStats();
+        renderScores();
+        renderCheats();
 
     } catch (error) {
         console.error(error);
-        $("queue").innerHTML =
-            '<div class="empty">Unable to load entries: ' +
-            escapeHTML(error.message) + '</div>';
-
-        toast("Failed to load leaderboard.", true);
+        notify("Failed to load scores: " + error.message, "error");
+    } finally {
+        setLoading(false);
     }
 }
 
-function renderStats() {
-    const pending = leaderboardEntries.filter(entry =>
-        !["VERIFIED", "CHEATS_USED"].includes(getStatus(entry))
-    );
+function updateStats() {
+    $("totalCount").textContent = scores.length;
 
-    const verified = leaderboardEntries.filter(entry =>
-        getStatus(entry) === "VERIFIED"
-    );
+    $("verifiedCount").textContent =
+        scores.filter(score => getStatus(score.data) === "VERIFIED").length;
 
-    $("totalCount").textContent = leaderboardEntries.length;
-    $("pendingCount").textContent = pending.length;
-    $("verifiedCount").textContent = verified.length;
-    $("cheatsCount").textContent = cheatEntries.length;
+    $("unverifiedCount").textContent =
+        scores.filter(score => getStatus(score.data) === "UNVERIFIED").length;
+
+    $("cheatCount").textContent = cheatScores.length;
 }
 
-function renderQueue() {
-    const pending = leaderboardEntries.filter(entry =>
-        !["VERIFIED", "CHEATS_USED"].includes(getStatus(entry))
-    );
+function renderScores() {
+    const search = $("searchInput").value.toLowerCase();
+    const filter = $("statusFilter").value;
 
-    if (!pending.length) {
-        $("queue").innerHTML =
-            '<div class="empty">No scores are waiting for review.</div>';
-        return;
-    }
+    const filtered = scores.filter(score => {
+        const name = getPlayerName(score.data).toLowerCase();
+        const id = score.id.toLowerCase();
+        const status = getStatus(score.data);
 
-    $("queue").innerHTML = pending.map(entry => `
-        <div class="entry">
-            <div class="entry-top">
-                <div>
-                    <div class="entry-name">
-                        ${escapeHTML(getPlayerName(entry))}
-                    </div>
-                    <div class="entry-info">
-                        Time: ${escapeHTML(formatTime(entry.time))}<br>
-                        Document ID: ${escapeHTML(entry.id)}<br>
-                        UID: ${escapeHTML(entry.uid || "Unknown")}
-                    </div>
-                </div>
-                ${getTag(getStatus(entry))}
-            </div>
-
-            <div class="actions">
-                <button class="primary"
-                    data-action="approve"
-                    data-id="${escapeHTML(entry.id)}">
-                    ✓ Approve
-                </button>
-
-                <button class="gold"
-                    data-action="cheat"
-                    data-id="${escapeHTML(entry.id)}">
-                    ⚑ CHEATS USED
-                </button>
-
-                <button class="danger"
-                    data-action="delete"
-                    data-id="${escapeHTML(entry.id)}">
-                    ✕ Delete
-                </button>
-            </div>
-        </div>
-    `).join("");
-}
-
-function renderHistory() {
-    const sorted = [...leaderboardEntries].sort((a, b) => {
-        const first = a.createdAt?.seconds || 0;
-        const second = b.createdAt?.seconds || 0;
-        return second - first;
+        return (
+            (name.includes(search) || id.includes(search)) &&
+            (filter === "ALL" || status === filter)
+        );
     });
 
-    if (!sorted.length) {
-        $("history").innerHTML =
-            '<div class="empty">No leaderboard submissions found.</div>';
+    if (!filtered.length) {
+        $("scoreRows").innerHTML = `
+            <tr><td colspan="5" class="empty">No matching scores found.</td></tr>
+        `;
         return;
     }
 
-    $("history").innerHTML = sorted.slice(0, 100).map(entry => `
-        <div class="entry">
-            <div class="entry-top">
-                <div>
-                    <div class="entry-name">
-                        ${escapeHTML(getPlayerName(entry))}
-                    </div>
-                    <div class="entry-info">
-                        ${escapeHTML(formatTime(entry.time))}<br>
-                        ID: ${escapeHTML(entry.id)}
-                    </div>
-                </div>
-                ${getTag(getStatus(entry))}
-            </div>
+    $("scoreRows").innerHTML = filtered.map(score => {
+        const status = getStatus(score.data);
 
-            <div class="actions">
-                <button class="danger"
-                    data-action="delete"
-                    data-id="${escapeHTML(entry.id)}">
-                    Delete Score
-                </button>
-            </div>
-        </div>
+        return `
+            <tr>
+                <td>${escapeHTML(getPlayerName(score.data))}</td>
+                <td>${escapeHTML(getTime(score.data))}</td>
+                <td>${formatStatus(status)}</td>
+                <td>${escapeHTML(score.id)}</td>
+                <td>
+                    <div class="actions">
+                        ${
+                            status === "UNVERIFIED"
+                            ? `<button class="primary" data-action="approve" data-id="${escapeHTML(score.id)}">Approve</button>`
+                            : ""
+                        }
+                        ${
+                            status !== "CHEATS_USED"
+                            ? `<button class="gold" data-action="cheat" data-id="${escapeHTML(score.id)}">Flag</button>`
+                            : ""
+                        }
+                        <button class="danger" data-action="delete" data-id="${escapeHTML(score.id)}">Delete</button>
+                    </div>
+                </td>
+            </tr>
+        `;
+    }).join("");
+}
+
+function renderCheats() {
+    if (!cheatScores.length) {
+        $("cheatRows").innerHTML = `
+            <tr><td colspan="4" class="empty">No CHEATS_USED records.</td></tr>
+        `;
+        return;
+    }
+
+    $("cheatRows").innerHTML = cheatScores.map(score => `
+        <tr>
+            <td>${escapeHTML(getPlayerName(score.data))}</td>
+            <td>${escapeHTML(getTime(score.data))}</td>
+            <td>${escapeHTML(score.id)}</td>
+            <td>
+                <div class="actions">
+                    <button class="danger" data-action="delete-cheat" data-id="${escapeHTML(score.id)}">
+                        Delete
+                    </button>
+                </div>
+            </td>
+        </tr>
     `).join("");
 }
 
 async function approveScore(id) {
-    if (!confirm("Approve this leaderboard score?")) return;
+    if (!confirm("Approve this score?")) return;
 
     try {
         await updateDoc(doc(db, "leaderboard", id), {
@@ -675,12 +743,12 @@ async function approveScore(id) {
             verifiedAt: serverTimestamp()
         });
 
-        toast("Score approved.");
-        await refreshAll();
+        notify("Score approved.");
+        await loadScores();
 
     } catch (error) {
         console.error(error);
-        toast("Approval failed: " + error.message, true);
+        notify("Approval failed: " + error.message, "error");
     }
 }
 
@@ -688,16 +756,16 @@ async function flagCheat(id) {
     if (!confirm("Mark this score as CHEATS_USED?")) return;
 
     try {
-        const original = leaderboardEntries.find(entry => entry.id === id);
+        const score = scores.find(item => item.id === id);
 
-        if (!original) {
-            throw new Error("Score could not be found.");
+        if (!score) {
+            throw new Error("Score not found.");
         }
 
         const batch = writeBatch(db);
 
         batch.set(doc(db, "cheatsLeaderboard", id), {
-            ...original,
+            ...score.data,
             verificationStatus: "CHEATS_USED",
             sourceDocumentId: id,
             cheatFlaggedAt: serverTimestamp(),
@@ -714,19 +782,19 @@ async function flagCheat(id) {
 
         await batch.commit();
 
-        toast("Score moved to CHEATS USED.");
-        await refreshAll();
+        notify("Score marked as CHEATS_USED.");
+        await loadScores();
 
     } catch (error) {
         console.error(error);
-        toast("Could not flag score: " + error.message, true);
+        notify("Could not flag score: " + error.message, "error");
     }
 }
 
 async function deleteScore(id) {
-    if (!confirm(
-        "Permanently delete this score?\n\nThis cannot be undone."
-    )) return;
+    if (!confirm("Permanently delete this score? This cannot be undone.")) {
+        return;
+    }
 
     try {
         const batch = writeBatch(db);
@@ -736,16 +804,31 @@ async function deleteScore(id) {
 
         await batch.commit();
 
-        toast("Score deleted.");
-        await refreshAll();
+        notify("Score deleted.");
+        await loadScores();
 
     } catch (error) {
         console.error(error);
-        toast("Delete failed: " + error.message, true);
+        notify("Delete failed: " + error.message, "error");
     }
 }
 
-$("queue").addEventListener("click", async event => {
+async function deleteCheatRecord(id) {
+    if (!confirm("Delete this CHEATS_USED record?")) return;
+
+    try {
+        await deleteDoc(doc(db, "cheatsLeaderboard", id));
+
+        notify("CHEATS_USED record deleted.");
+        await loadScores();
+
+    } catch (error) {
+        console.error(error);
+        notify("Delete failed: " + error.message, "error");
+    }
+}
+
+$("scoreRows").addEventListener("click", async event => {
     const button = event.target.closest("button[data-action]");
     if (!button) return;
 
@@ -761,33 +844,47 @@ $("queue").addEventListener("click", async event => {
     button.disabled = false;
 });
 
-$("history").addEventListener("click", async event => {
+$("cheatRows").addEventListener("click", async event => {
     const button = event.target.closest("button[data-action]");
     if (!button) return;
 
-    if (button.dataset.action === "delete") {
+    if (button.dataset.action === "delete-cheat") {
         button.disabled = true;
-        await deleteScore(button.dataset.id);
+        await deleteCheatRecord(button.dataset.id);
         button.disabled = false;
     }
 });
 
-$("refreshButton").addEventListener("click", refreshAll);
-$("historyRefresh").addEventListener("click", refreshAll);
+$("searchInput").addEventListener("input", renderScores);
+$("statusFilter").addEventListener("change", renderScores);
+$("refreshButton").addEventListener("click", loadScores);
 
-$("submitForm").addEventListener("submit", async event => {
+$("logoutButton").addEventListener("click", async () => {
+    try {
+        await signOut(auth);
+        scores = [];
+        cheatScores = [];
+        $("dashboard").style.display = "none";
+        $("account").textContent = "Signed out";
+        notify("Signed out.");
+    } catch (error) {
+        notify(error.message, "error");
+    }
+});
+
+$("manualForm").addEventListener("submit", async event => {
     event.preventDefault();
 
     if (!currentUser) {
-        toast("Waiting for Firebase authentication.", true);
+        notify("Waiting for authentication.", "error");
         return;
     }
 
-    const name = $("playerName").value.trim();
-    const seconds = Number($("playerTime").value);
+    const name = $("manualName").value.trim();
+    const seconds = Number($("manualTime").value);
 
     if (!name || !Number.isFinite(seconds) || seconds <= 0) {
-        toast("Enter a valid name and completion time.", true);
+        notify("Enter a valid player name and time.", "error");
         return;
     }
 
@@ -800,27 +897,27 @@ $("submitForm").addEventListener("submit", async event => {
             name,
             time: Math.round(seconds * 1000),
             uid: currentUser.uid,
-            verificationStatus: "VERIFIED",
-            verificationMethod: "ADMIN_SUBMITTED",
+            verificationStatus: "UNVERIFIED",
+            verificationMethod: "PENDING_REVIEW",
             createdAt: serverTimestamp()
         });
 
-        $("submitForm").reset();
-        toast("Leaderboard entry submitted.");
-        await refreshAll();
+        $("manualForm").reset();
+
+        notify("Score submitted as UNVERIFIED.");
+        await loadScores();
 
     } catch (error) {
         console.error(error);
-        toast("Submission failed: " + error.message, true);
+        notify("Submission failed: " + error.message, "error");
+    } finally {
+        button.disabled = false;
+        button.textContent = "Add Score";
     }
-
-    button.disabled = false;
-    button.textContent = "Submit Score";
-}
-
-);
+});
 
 authenticate();
 </script>
+
 </body>
 </html>
